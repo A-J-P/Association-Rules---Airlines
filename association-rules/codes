@@ -1,0 +1,89 @@
+==
+Here are the codes to make the numeric variables into categorical variables.
+
+flightsF$dep_delay=cut(flights.clean$dep_delay, breaks=c(-Inf,15,Inf),
+
+flightsF$arr_delay = cut(flights.clean$arr_delay,
+
+flightsF$air_time = cut(flights.clean$air_time,
+
+flightsF$distance = cut(flights.clean$distance,
+
+labels=c('no delay', 'delayed'))
+
+breaks = c(-Inf, 15, Inf),
+
+labels = c('no delay', 'delayed'))
+
+breaks = c(-Inf, 392, Inf),
+
+labels = c('below 392','above 392'))
+
+breaks = c(-Inf, 2408, Inf),
+
+labels = c('domestic flight', 'international flight'))
+
+==
+Association between Variables and dep delay
+
+association between variables and departure delay. We sort the rules by lift and list 20 rules here.
+
+lhs.vars = c('origin','carrier', 'air_time','distance',month, dep_hours, arr_hours, dest
+
+rhs.var = 'dep_delay'
+
+rhs.values = c('dep_delay=no delay',dep_delay=delayed)
+
+apriori.appearance = list(rhs=rhs.values,default=lhs)
+
+apriori.parameter = list(support=0.01,confidence=0.01,
+
+minlen=1,
+
+maxlen=3)
+
+rules = apriori(flightsF[,c(lhs.vars, rhs.var)],
+
+parameter=apriori.parameter,
+
+appearance=apriori.appearance)
+
+==
+rules.sorted.by.lift = sort(rules, by='lift')
+
+inspect(rules.sorted.by.lift[1:20])
+
+==
+between varialbes and arr_delay
+
+rhs.var1 = 'arr_delay'
+
+rhs.values1 = c('arr_delay=no delay','arr_delay=delayed')
+
+apriori.appearance = list(rhs=rhs.values1,default='lhs')
+apriori.parameter = list(support=0.01,confidence=0.01,
+
+minlen=1,
+
+maxlen=3)
+
+rules1 = apriori(flightsF[,c(lhs.vars, rhs.var1)],
+
+parameter=apriori.parameter,
+
+appearance=apriori.appearance)
+
+==
+rules.sorted.by.lift1 = sort(rules1, by='lift')
+
+inspect(rules.sorted.by.lift1[1:20])
+==
+
+plot(rules.sorted.by.lift[1:500])
+
+plot(rules.sorted.by.lift1[1:500])
+
+plot(rules.sorted.by.lift[1:20], method='graph',control=list(type='items'))
+
+plot(rules.sorted.by.lift1[1:20], method='graph',control=list(type='items'))
+
