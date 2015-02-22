@@ -1,0 +1,20 @@
+==
+packages
+library(nycflights13)
+library(arules)
+library(ggplot2)
+library(arulesViz)
+==
+data
+data(flights)
+dim(flights)
+head(flights,5)
+str(flights)
+summary(flights)
+==
+data setup
+sum(is.na(flights))
+flights.clean = flights[complete.cases(flights),]
+nrow(flights)
+nrow(flights.clean)
+rm(flightsF)
