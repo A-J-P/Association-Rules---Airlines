@@ -1,0 +1,34 @@
+
+==
+flights.clean$dep_time[flights.clean$dep_time==2400] = 0
+
+flights.clean$arr_time[flights.clean$arr_time==2400] = 0
+
+flightsF = data.frame(origin = factor(flights.clean$origin),
+
+flightsF$month = factor(flights.clean$month)
+
+flightsF$dest=factor(flights.clean$dest)
+
+flightsF$dep_hour = factor(trunc(flights.clean$dep_time/100))
+
+flightsF$arr_hour = factor(trunc(flights.clean$arr_time/100))
+
+
+==
+For the dep delay variable, the histogram of this variable is:
+
+qplot(data=flights.clean,x=dep_delay,color='red')
+
+==
+For the arr delay variable, the histogram of this variable is:
+
+qplot(data=flights.clean,x=arr_delay,color='red')
+
+==
+qplot(data=flights.clean,x=distance,color='red')
+
+==
+red The histogram of air time is:
+
+qplot(data=flights.clean,x=air_time,color='red')
